@@ -208,29 +208,27 @@ Hint: Make sure your columns have descriptive names!
 #| label: table-of-simulated Means
 all_simulations |>
     group_by (n,df) |>
-  mutate(mean_simulated_mean = mean(simulated_means)) |>
-  ungroup() |>
+    summarize(sum_simulated_mean = sum(simulated_means), .groups = "drop") |>
   pivot_wider(names_from = n,
-              values_from = mean_simulated_mean) 
-all_simulations |>
+              values_from = sum_simulated_mean) |>
   gt() |>
   tab_header(
     title = "Simulated Means of Chi Sq Test",
     subtitle = "1,10,100,1000, and 10,000 Trials"
   ) |>
-  #Found table_style code through r help tab
-  tab_style(
-    style = list(
-      cell_fill(color = "lightcyan"),
-      cell_text(weight = "bold")
-      ),
-    location = cells_column_labels()) |>
-   tab_style(
-    style = list(
-      cell_fill(color = "Green"),
-      cell_text(color = "black")
-      ),
-    location = cells_body())
+tab_style(
+  style = list(
+  cell_fill(color = "red"),
+  cell_text(weight = "bold")
+  ),
+location = cells_column_labels()) |>
+tab_style(
+  style = list(
+    cell_fill(color = "Green"),
+    cell_text(color = "White")
+    ),
+    location = cells_body()
+  )
 
 ```
 
