@@ -208,9 +208,9 @@ Hint: Make sure your columns have descriptive names!
 #| label: table-of-simulated Means
 all_simulations |>
     group_by (n,df) |>
-    summarize(sum_simulated_mean = sum(simulated_means), .groups = "drop") |>
+    summarize(mean_simulated_mean = mean(simulated_means), .groups = "drop") |>
   pivot_wider(names_from = n,
-              values_from = sum_simulated_mean) |>
+              values_from = mean_simulated_mean) |>
   gt() |>
   tab_header(
     title = "Simulated Means of Chi Sq Test",
